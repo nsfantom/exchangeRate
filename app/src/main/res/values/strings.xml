@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">exchangeRate</string>
+    <string name="error_default">Oops…</string>
+    <string name="error_no_data">No exchange rate data is available for the selected currency.</string>
+
+
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="title_dashboard">latest exchange rates</string>
+</resources>
