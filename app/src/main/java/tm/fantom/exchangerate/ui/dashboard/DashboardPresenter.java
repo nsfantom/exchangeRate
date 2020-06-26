@@ -49,7 +49,10 @@ public class DashboardPresenter extends BaseApiPresenter implements DashboardCon
                     .compose(applyMaybeBackground())
                     .map(LatestResponse::getRates)
                     .map(this::parseRates)
-                    .subscribe(rates -> appDatabase.ratesDao().insert(rates), this::parseErrorSilent)
+                    .subscribe(rates -> {
+                        appDatabase.ratesDao().insert(rates);
+                        sharedStorage.saveLastSync();
+                    }, this::parseErrorSilent)
             );
         }
     }
