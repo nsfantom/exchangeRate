@@ -1,0 +1,2 @@
+# exchangeRate
+https://exchangeratesapi.io/
