@@ -16,7 +16,6 @@ import timber.log.Timber;
 import tm.fantom.exchangerate.RateApp;
 import tm.fantom.exchangerate.api.SimpleApi;
 import tm.fantom.exchangerate.db.AppDatabase;
-import tm.fantom.exchangerate.repo.Repository;
 import tm.fantom.exchangerate.repo.SharedStorage;
 
 public abstract class BaseApiPresenter {
