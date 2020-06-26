@@ -8,12 +8,15 @@ import androidx.annotation.StringRes;
 import javax.inject.Inject;
 
 import io.reactivex.MaybeTransformer;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 import tm.fantom.exchangerate.RateApp;
 import tm.fantom.exchangerate.api.SimpleApi;
+import tm.fantom.exchangerate.db.AppDatabase;
+import tm.fantom.exchangerate.repo.Repository;
 import tm.fantom.exchangerate.repo.SharedStorage;
 
 public abstract class BaseApiPresenter {
@@ -23,6 +26,9 @@ public abstract class BaseApiPresenter {
 
     @Inject
     protected SharedStorage sharedStorage;
+
+    @Inject
+    protected AppDatabase appDatabase;
 
     @Inject
     protected Resources resources;
@@ -73,6 +79,11 @@ public abstract class BaseApiPresenter {
     }
 
     protected <T> MaybeTransformer<T, T> applyMaybeAsync() {
+        return upstream -> upstream.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    protected <T> ObservableTransformer<T, T> applyObservableAsync() {
         return upstream -> upstream.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

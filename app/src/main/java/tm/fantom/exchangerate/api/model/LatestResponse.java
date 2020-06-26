@@ -1,10 +1,13 @@
 package tm.fantom.exchangerate.api.model;
 
+import androidx.room.Entity;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
+@Entity
 public class LatestResponse {
 
     @SerializedName("rates")

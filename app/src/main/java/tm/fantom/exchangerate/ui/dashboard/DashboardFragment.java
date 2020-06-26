@@ -21,6 +21,7 @@ import java.util.List;
 import tm.fantom.exchangerate.R;
 import tm.fantom.exchangerate.RateApp;
 import tm.fantom.exchangerate.databinding.FragmentDashboardBinding;
+import tm.fantom.exchangerate.repo.model.RateModel;
 import tm.fantom.exchangerate.ui.Fragments;
 import tm.fantom.exchangerate.ui.VHOffsetItemDecoration;
 import tm.fantom.exchangerate.ui.base.BaseFragment;
@@ -29,7 +30,7 @@ import tm.fantom.exchangerate.ui.base.BaseFragment;
 public class DashboardFragment extends BaseFragment implements DashboardContract.View {
     private FragmentDashboardBinding layout;
     private DashboardPresenter presenter;
-    private MovieSearchAdapter adapter;
+    private RatesAdapter adapter;
     private int scrollPosition;
 
     public static DashboardFragment newInstance() {
@@ -37,10 +38,10 @@ public class DashboardFragment extends BaseFragment implements DashboardContract
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NotNull Context context) {
         super.onAttach(context);
         presenter = new DashboardPresenter();
-        adapter = new MovieSearchAdapter();
+        adapter = new RatesAdapter();
         RateApp.get(context).getAppComponent().inject(presenter);
     }
 

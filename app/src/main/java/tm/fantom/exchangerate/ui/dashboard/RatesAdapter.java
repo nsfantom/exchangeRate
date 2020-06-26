@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import tm.fantom.exchangerate.databinding.ItemRateBinding;
+import tm.fantom.exchangerate.repo.model.RateModel;
 import tm.fantom.exchangerate.ui.base.BaseAdapter;
 import tm.fantom.exchangerate.ui.base.BaseViewHolder;
 
 
-public class MovieSearchAdapter extends BaseAdapter<RateModel, BaseViewHolder<RateModel>> {
+public class RatesAdapter extends BaseAdapter<RateModel, BaseViewHolder<RateModel>> {
 
     private OnRateClickListener clickListener;
 
@@ -27,7 +28,7 @@ public class MovieSearchAdapter extends BaseAdapter<RateModel, BaseViewHolder<Ra
         return new ItemViewHolder(binding.getRoot());
     }
 
-    public MovieSearchAdapter setClickListener(OnRateClickListener clickListener) {
+    public RatesAdapter setClickListener(OnRateClickListener clickListener) {
         this.clickListener = clickListener;
         return this;
     }

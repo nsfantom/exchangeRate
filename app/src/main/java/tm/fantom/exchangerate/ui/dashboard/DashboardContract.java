@@ -2,6 +2,7 @@ package tm.fantom.exchangerate.ui.dashboard;
 
 import java.util.List;
 
+import tm.fantom.exchangerate.repo.model.RateModel;
 import tm.fantom.exchangerate.ui.base.BaseContract;
 
 public interface DashboardContract {

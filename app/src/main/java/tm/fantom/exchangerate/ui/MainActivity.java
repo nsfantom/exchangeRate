@@ -1,11 +1,10 @@
 package tm.fantom.exchangerate.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.fragment.app.FragmentTransaction;
 
 import javax.inject.Inject;
 
@@ -16,6 +15,7 @@ import tm.fantom.exchangerate.repo.SharedStorage;
 import tm.fantom.exchangerate.ui.base.BaseActivity;
 import tm.fantom.exchangerate.ui.base.BaseFragment;
 import tm.fantom.exchangerate.ui.dashboard.DashboardFragment;
+import tm.fantom.exchangerate.ui.detail.DetailFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -45,7 +45,6 @@ public class MainActivity extends BaseActivity {
     public void setThemeMode(boolean darkMode) {
         if (sharedStorage.isDarkMode() != darkMode) {
             sharedStorage.saveDarkMode(darkMode);
-//            initThemeMode(darkMode);
             recreate();
         }
     }
@@ -80,7 +79,7 @@ public class MainActivity extends BaseActivity {
                 fragment = DashboardFragment.newInstance();
                 break;
             case Fragments.DETAILS:
-//                fragment = MovieDetailFragment.newInstance();
+                fragment = DetailFragment.newInstance();
                 break;
 
         }

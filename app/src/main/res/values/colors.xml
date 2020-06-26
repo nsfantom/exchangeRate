@@ -9,8 +9,6 @@
     <color name="colorBackgroundLight">#FFFFFF</color>
     <color name="colorBackgroundMain">#EDEDED</color>
 
-    <color name="colorSkeleton">#B9B9B9</color>
-
 
     <color name="colorTextPrimary">#000000</color>
     <color name="colorTextSecondary">#1B1B1B</color>
@@ -30,4 +28,12 @@
     <color name="colorDarkTextSecondary">#EDEDED</color>
 
     <color name="colorBackgroundDark">#000000</color>
+
+
+    <color name="colorBackgroundChart">#FFFDE7</color>
+    <color name="colorChartAxis">#C8D1D6</color>
+    <color name="colorChartValue">#A3B2BA</color>
+    <color name="colorChartLine">#F9A825</color>
+    <color name="colorChartDot">#212527</color>
+
 </resources>

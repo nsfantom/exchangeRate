@@ -6,21 +6,24 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import io.reactivex.subjects.BehaviorSubject;
+import tm.fantom.exchangerate.repo.model.RateSymbol;
+import tm.fantom.exchangerate.util.DateUtils;
 
 
 public final class SharedStorage {
-    private static final String SESSION_ID = "auth_token";
     private static final String THEME_DARK = "dark_mode";
+    private static final String LAST_SYNC = "last_sync";
 
     private SharedPreferences sharedPreferences;
     private Context context;
     private Gson gson;
 
-//    private BehaviorSubject<MovieId> movieIdBehaviorSubject = BehaviorSubject.create();
-//
-//    public BehaviorSubject<MovieId> getMovieIdSubject() {
-//        return movieIdBehaviorSubject;
-//    }
+    private BehaviorSubject<RateSymbol> rateSymbolBehaviorSubject = BehaviorSubject.create();
+
+    public BehaviorSubject<RateSymbol> getRateSymbolBehaviorSubject() {
+        return rateSymbolBehaviorSubject;
+    }
 
     public SharedStorage(Context context) {
         this.context = context;
@@ -28,24 +31,6 @@ public final class SharedStorage {
 //                .registerTypeAdapter(DateTime.class, new DateTimeConverter())
                 .create();
     }
-
-//    public boolean saveAuthToken(AuthToken guest) {
-//        if (guest == null) {
-//            return getPrefs().edit().remove(SESSION_ID).commit();
-//        }
-//        return getPrefs().edit()
-//                .putString(SESSION_ID, gson.toJson(guest))
-//                .commit();
-//    }
-//
-//    public AuthToken getAuthToken() {
-//        AuthToken token = new AuthToken();
-//        String json = getPrefs().getString(SESSION_ID, "");
-//        if (!TextUtils.isEmpty(json)) {
-//            token = gson.fromJson(json, AuthToken.class);
-//        }
-//        return token;
-//    }
 
     public boolean saveDarkMode(boolean darkMode) {
         if (darkMode)
@@ -62,5 +47,13 @@ public final class SharedStorage {
         if (sharedPreferences == null)
             sharedPreferences = context.getSharedPreferences("tmdb", Context.MODE_PRIVATE);
         return sharedPreferences;
+    }
+
+    public void saveLastSync() {
+        getPrefs().edit().putLong(LAST_SYNC, DateUtils.getSyncTime()).apply();
+    }
+
+    public boolean isLastSyncExpired() {
+        return DateUtils.isExpired(getPrefs().getLong(LAST_SYNC, 0));
     }
 }
