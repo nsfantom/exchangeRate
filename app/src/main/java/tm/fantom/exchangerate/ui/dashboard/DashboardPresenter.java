@@ -45,16 +45,20 @@ public class DashboardPresenter extends BaseApiPresenter implements DashboardCon
 
     private void getRates() {
         if (sharedStorage.isLastSyncExpired()) {
-            getCompositeDisposable().add(simpleApi.getLatest()
-                    .compose(applyMaybeBackground())
-                    .map(LatestResponse::getRates)
-                    .map(this::parseRates)
-                    .subscribe(rates -> {
-                        appDatabase.ratesDao().insert(rates);
-                        sharedStorage.saveLastSync();
-                    }, this::parseErrorSilent)
-            );
+            getFromNetwork();
         }
+    }
+
+    private void getFromNetwork() {
+        getCompositeDisposable().add(simpleApi.getLatest()
+                .compose(applyMaybeBackground())
+                .map(LatestResponse::getRates)
+                .map(this::parseRates)
+                .subscribe(rates -> {
+                    appDatabase.ratesDao().insert(rates);
+                    sharedStorage.saveLastSync();
+                }, this::parseErrorSilent)
+        );
     }
 
     private List<RateModel> parseRates(Map<String, Double> mapRates) {
@@ -68,7 +72,7 @@ public class DashboardPresenter extends BaseApiPresenter implements DashboardCon
 
     @Override
     public void forceRefresh() {
-        subscribe();
+        getFromNetwork();
     }
 
     @Override
