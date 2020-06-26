@@ -1,7 +1,5 @@
 package tm.fantom.exchangerate.api.model;
 
-import androidx.core.util.Pair;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
